@@ -1,3 +1,6 @@
+pip install ipyvizzu[streamlit]
+pip install ipyvizzu-story[streamlit]
+
 import streamlit as st
 from ipyvizzu import Data, Config
 from ipyvizzustory import Story, Slide, Step
