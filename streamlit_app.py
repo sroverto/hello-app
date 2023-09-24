@@ -1,6 +1,6 @@
-pip install st-vizzu
-pip install ipyvizzu[streamlit]
-pip install ipyvizzu-story[streamlit]
+!pip install st-vizzu
+!pip install ipyvizzu[streamlit]
+!pip install ipyvizzu-story[streamlit]
 
 import streamlit as st
 from ipyvizzu import Data, Config
