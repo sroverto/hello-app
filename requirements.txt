@@ -1,1 +1,2 @@
-
+ipyvizzu==0.16.1
+ipyvizzu-story==0.8.0
