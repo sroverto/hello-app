@@ -1,2 +1,2 @@
-ipyvizzu==0.16.1
-ipyvizzu-story==0.8.0
+ipyvizzu[streamlit]==0.16.1
+ipyvizzu-story[streamlit]==0.8.0
