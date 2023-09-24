@@ -1,0 +1,9 @@
+ipyvizzu
+ipyvizzu-story
+pandas
+streamlit
+numpy
+streamlit_extras
+pyyaml
+st-vizzu
+st-pages
