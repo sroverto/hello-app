@@ -1,58 +1,89 @@
-!pip install st-vizzu
-!pip install ipyvizzu[streamlit]
-!pip install ipyvizzu-story[streamlit]
+# import ipyvizzu and ipyvizzu-story
 
-import streamlit as st
+
 from ipyvizzu import Data, Config
-from ipyvizzustory import Story, Slide, Step
+
+from ipyvizzustory import Slide, Step
+
+from ipyvizzustory import Story  # or
+
+# from ipyvizzustory.env.st.story import Story
 
 
-st.title("Streamlit Tutorial App")
-st.write("This is my new app")
+# create data and initialize Story with the created data
 
-button1 = st.button("Click me")
-if button1:
-    st.write("This is some text")
 
-from st_vizzu import *
-import pandas as pd
-import streamlit as st
+data = Data()
 
-# Load Data
-df = pd.read_csv("Data/music_data.csv", index_col=0)
-# Create ipyvizzu Object with the DataFrame
-obj = create_vizzu_obj(df)
+data.add_series("Foo", ["Alice", "Bob", "Ted"])
 
-# Preset plot usage. Preset plots works directly with DataFrames.
-bar_obj = bar_chart(df,
-            x = "Kinds", 
-            y = "Popularity",
-            title= "1.Using preset plot function `bar_chart()`"
-            )
+data.add_series("Bar", [15, 32, 12])
 
-# Animate with defined arguments 
-anim_obj = beta_vizzu_animate( bar_obj,
-    x = "Genres",
-    y =  ["Popularity", "Kinds"],
-    title = "Animate with beta_vizzu_animate () function",
-    label= "Popularity",
-    color="Genres",
-    legend="color",
-    sort="byValue",
-    reverse=True,
-    align="center",
-    split=False,
+data.add_series("Baz", [5, 3, 2])
+
+# you can also add data with pandas
+
+
+# import pandas as pd
+
+#
+
+# data = Data()
+
+# df = pd.read_csv(
+
+#     "https://ipyvizzu-story.vizzuhq.com/0.8/assets/data/data.csv"
+
+# )
+
+# data.add_df(df)
+
+
+story = Story(data=data)
+
+# create Slides and Steps and add them to the Story
+
+
+slide1 = Slide(
+
+    Step(
+
+        Config({"x": "Foo", "y": "Bar"}),
+
+    )
+
 )
 
-# Animate with general dict based arguments 
-_dict = {"size": {"set": "Popularity"}, 
-    "geometry": "circle",
-    "coordSystem": "polar",
-    "title": "Animate with vizzu_animate () function",
-    }
-anim_obj2 = vizzu_animate(anim_obj,_dict)
+story.add_slide(slide1)
 
-# Visualize within Streamlit
-with st.container(): # Maintaining the aspect ratio
-    st.button("Animate")
-    vizzu_plot(anim_obj2)
+slide2 = Slide(
+
+    Step(Config({"color": "Foo", "x": "Baz", "geometry": "circle"}))
+
+)
+
+story.add_slide(slide2)
+
+# note: in Streamlit if you want to use the `play` method,
+
+# you need to set the width and height in pixels
+
+
+story.set_size(width="800px", height="480px")
+
+# you can export the Story into a html file
+
+
+story.export_to_html(filename="mystory.html")
+
+# or you can get the html Story as a string
+
+
+html = story.to_html()
+
+print(html)
+
+# you can display the Story with the `play` method
+
+
+story.play()
